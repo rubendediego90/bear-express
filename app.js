@@ -1,9 +1,10 @@
-const express = require('express')
-const product = require('./api/product')
-const app = express()
+require('dotenv').config()
 
-const PORT = process.env.PORT || 5050
+const Server = require('./models/server')
 
-app.use("/api/product",product)
 
-app.listen(PORT, () => console.log(`Server is runing in por ${PORT}`))
+const server = new Server()
+server.listen()
+
+
+
