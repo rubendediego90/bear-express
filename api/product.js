@@ -5,7 +5,7 @@ router.get("/",async(req,res)=>{
     try{
         res.json({
             status:200,
-            message:"Alfa eres un payaso"
+            message:"Alfa eres un payaso y Randy Tambien"
         })
     }catch(error){
         console.error(error)
