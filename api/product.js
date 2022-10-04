@@ -5,7 +5,7 @@ router.get("/",async(req,res)=>{
     try{
         res.json({
             status:200,
-            message:"Get data has successfully"
+            message:"Te quiero churrita"
         })
     }catch(error){
         console.error(error)
