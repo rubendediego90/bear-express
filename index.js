@@ -7,19 +7,12 @@ const server = new Server()
 server.listen()*/
 
 
+const express = require('express')
+const product = require('./api/product')
+const app = express()
 
-// Add Express
-const express = require("express");
+const PORT = process.env.PORT || 5050
 
-// Initialize Express
-const app = express();
+app.use("/api/product",product)
 
-// Create GET request
-app.get("/", (req, res) => {
-  res.send("Express on Vercel");
-});
-
-// Initialize server
-app.listen(5000, () => {
-  console.log("Running on port 5000.");
-});
+app.listen(PORT, () => console.log(`Server is runing in por ${PORT}`))
