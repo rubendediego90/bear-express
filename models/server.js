@@ -1,5 +1,6 @@
 const express = require('express')
 const product = require('../api/product')
+const cors = require('cors')
 class Server {
 
     constructor(){
@@ -13,12 +14,33 @@ class Server {
     }
 
     middlewares(){
+        this.app.use(cors())
         this.app.use("/api/product",product)
     }
    
     routes(){
         this.app.get('/',(req,res)=>{
-            res.send('Hello Wordl')
+            res.json({
+                msg:"get Api"
+            })
+        })
+
+        this.app.put('/',(req,res)=>{
+            res.json({
+                msg:"put Api"
+            })
+        })
+
+        this.app.post('/',(req,res)=>{
+            res.json({
+                msg:"post Api"
+            })
+        })
+
+        this.app.delete('/',(req,res)=>{
+            res.json({
+                msg:"delete Api"
+            })
         })
     }
 
