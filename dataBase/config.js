@@ -2,8 +2,9 @@
 const mongoose = require('mongoose')
 
 const dbConnection = async () =>{
+    const CONECTION_STRING = 'mongodb+srv://user_node_boda:yuTXSKSd9fAQlctq@bodabbdd.tylkgmz.mongodb.net/BodaBBDD'
     try{
-       await mongoose.connect(process.env.CONECTION_STRING,
+       await mongoose.connect(CONECTION_STRING,
         {
             useNewUrlParser:true,
             useUnifiedTopology:true,
