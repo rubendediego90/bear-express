@@ -2,6 +2,7 @@ const express = require('express')
 const product = require('../routes/product')
 const user = require('../routes/user')
 const cors = require('cors')
+const { dbConnection } = require('../dataBase/config')
 class Server {
 
     constructor(){
@@ -9,10 +10,19 @@ class Server {
         this.port =process.env.PORT
         this.usuariosPath='/api/usuarios'
         this.productPath='/api/product'
+
+        //Conectar BBDD
+        this.conectarDB()
+
         //Middlewares
         this.middlewares()
+
          //Rutas de la aplicación
         this.routes()
+    }
+
+    async conectarDB(){
+        await dbConnection()
     }
 
     middlewares(){

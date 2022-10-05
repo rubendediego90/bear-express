@@ -1,4 +1,5 @@
 const {responde,request} = require('express')
+const User = require('../models/user')
 
 const usersGet = (req=request,res=responde)=>{
 
@@ -10,14 +11,17 @@ const usersGet = (req=request,res=responde)=>{
     })
 }
 
-const usersPost= (req,res=responde)=>{
+const usersPost= async(req,res=responde)=>{
 
-    const {nombre} = req.body
+    const body = req.body
+    const user = new User(body)
+
+    await user.save()//Grabar en la bbdd
 
 
     res.json({
         msg:"post Api contriolador",
-        nombre
+        user
     })
 }
 
