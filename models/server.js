@@ -7,7 +7,8 @@ class Server {
     constructor(){
         this.app = express()
         this.port =process.env.PORT
-
+        this.usuariosPath='/api/usuarios'
+        this.productPath='/api/product'
         //Middlewares
         this.middlewares()
          //Rutas de la aplicación
@@ -15,12 +16,16 @@ class Server {
     }
 
     middlewares(){
+        //CORS
         this.app.use(cors())
+
+        //Parseo y lectura del body
+        this.app.use(express.json())//Serializar a formate JSON
     }
     
     routes(){
-        this.app.use("/api/product",product)
-        this.app.use('/api/usuarios',user)
+        this.app.use(this.usuariosPath,user)
+        this.app.use(this.productPath,product)
     }
 
     listen (){
