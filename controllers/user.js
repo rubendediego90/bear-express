@@ -16,13 +16,20 @@ const usersPost= async(req,res=responde)=>{
     const body = req.body
     const user = new User(body)
 
-    await user.save()//Grabar en la bbdd
+    try{
+        await user.save()//Grabar en la bbdd
 
 
-    res.json({
-        msg:"post Api contriolador",
-        user
-    })
+        res.json({
+            msg:"post Api contriolador",
+            user
+        })
+    }catch(error){
+        res.json({
+            msg:error,
+        })
+    }
+
 }
 
 const usersPut = (req,res=responde)=>{
