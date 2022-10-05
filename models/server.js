@@ -1,5 +1,5 @@
 const express = require('express')
-const product = require('../routes/productuct')
+const product = require('../routes/product')
 const user = require('../routes/user')
 const cors = require('cors')
 class Server {
