@@ -5,11 +5,20 @@ const User = require('../models/user')
 const usersGet =async (req=request,res=responde)=>{
 
     //const {q,nombre='NONAME',apikey,page=1,limit=10} = req.query//valores por defecto
+    const {page=0,pageSize=10} = req.query//valores por defecto
 
-    const users = await User.find()
+    const query = {estado:true}
+
+    const [total,users] = await Promise.all([
+         User.countDocuments(query),
+         User.find(query)
+        .skip(Number(page))//espera un numero
+        .limit(Number(pageSize))//espera un numero
+
+    ])
 
     res.json({
-        users,
+        total,users
        // q,nombre,apikey,page,limit
     })
 }
