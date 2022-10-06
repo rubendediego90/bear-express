@@ -1,27 +1,27 @@
 const {responde,request} = require('express')
-const User = require('../models/user')
 const bcryptjs = require('bcryptjs')
+const User = require('../models/user')
 
-const usersGet = (req=request,res=responde)=>{
+const usersGet =async (req=request,res=responde)=>{
 
-    const {q,nombre='NONAME',apikey,page=1,limit=10} = req.query//valores por defecto
+    //const {q,nombre='NONAME',apikey,page=1,limit=10} = req.query//valores por defecto
+
+    const users = await User.find()
+
     res.json({
-        msg:"get Api contriolador",
-        q,nombre,apikey,
-        page,limit
+        users,
+       // q,nombre,apikey,page,limit
     })
 }
 
 const usersPost= async(req,res=responde)=>{
 
-    const body = req.body
-    const user = new User(body)
-
-    //Verificar que el correo existe
+    const {nombre,correo,password,rol} = req.body
+    const user = new User({nombre,correo,password,rol})
 
     //Encriptar pass
     const salt = bcryptjs.genSaltSync()//Numero de vueltas para hacer mas complicada la enctriptacion por defecto es 10, cuantas mas vueltas mas tarda
-    user.password = bcryptjs.hashSync(user.password,salt)
+    user.password = bcryptjs.hashSync(password,salt)
 
     try{
         await user.save()//Grabar en la bbdd
@@ -38,12 +38,23 @@ const usersPost= async(req,res=responde)=>{
 
 }
 
-const usersPut = (req,res=responde)=>{
+const usersPut = async (req,res=responde)=>{
 
     const {id} = req.params //Coger valores de la ruta la parte de delante de la ?
+    const {password,google,correo,_id,...resto} = req.body //se saca el id para que no se pueda actualizar
+
+    //Todo Validar contra bbdd
+    if(password){
+        //Encriptar pass
+        const salt = bcryptjs.genSaltSync()//Numero de vueltas para hacer mas complicada la enctriptacion por defecto es 10, cuantas mas vueltas mas tarda
+        resto.password = bcryptjs.hashSync(password,salt)
+    }
+
+    const user = await User.findByIdAndUpdate(id,resto)
+
     res.json({
         msg:"put Api contriolador",
-        id
+        user
     })
 }
 

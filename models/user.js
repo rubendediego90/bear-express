@@ -28,6 +28,11 @@ const UserSchema = Schema({
         default:false
     }
 })
+//Sobreescribir metodos video 125 min 6
+UserSchema.methods.toJSON = function (){
+    const {__v,password,...user} = this.toObject()//user son el resto
+    return user
+}
 
 
 module.exports = model('User',UserSchema)
