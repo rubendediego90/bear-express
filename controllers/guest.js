@@ -3,7 +3,6 @@ const Guest = require('../models/guest')
 
 const guestGet =async (req=request,res=responde)=>{
 
-    //const {q,nombre='NONAME',apikey,page=1,limit=10} = req.query//valores por defecto
     const {page=0,pageSize=10} = req.query//valores por defecto
 
     const query = {estado:true}
@@ -11,15 +10,12 @@ const guestGet =async (req=request,res=responde)=>{
     const [total,guests] = await Promise.all([
         Guest.countDocuments(query),
         Guest.find(query)
-        .skip(Number(page))//espera un numero
-        .limit(Number(pageSize))//espera un numero
+        .skip(Number(page))
+        .limit(Number(pageSize))
 
     ])
 
-    res.json({
-        total,guests
-       // q,nombre,apikey,page,limit
-    }).status(200)
+    res.json({total,guests}).status(200)
 }
 
 const guestPost= async(req,res=responde)=>{
@@ -43,21 +39,26 @@ const guestPut = async (req,res=responde)=>{
     const {id} = req.params 
     const {_id,...resto} = req.body
 
-    const guest = await Guest.findByIdAndUpdate(id,resto)
+    try{
+        const guest = await Guest.findByIdAndUpdate(id,resto)
 
-    res.json(guest).status(200)
+        res.json(guest).status(200)
+    }catch(error){
+        res.json(error)
+    }
 }
 
 const guestDelete = async(req,res=responde)=>{
 
     const {id} = req.params
 
-    //Borrado fisico
-    const guest = await Guest.findByIdAndDelete(id)
+    try{
+        const guest = await Guest.findByIdAndUpdate(id,resto)
 
-    res.json(
-        guest
-    )
+        res.json(guest).status(200)
+    }catch(error){
+        res.json(error)
+    }
 }
 
 module.exports = {

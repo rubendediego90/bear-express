@@ -34,6 +34,10 @@ const GuestSchema = Schema({
 		default: Date.now
     }
 })
+GuestSchema.methods.toJSON = function (){
+    const {__v,...guest} = this.toObject()
+    return guest
+}
 
 
 module.exports = model('Guest',GuestSchema)
