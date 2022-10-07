@@ -1,5 +1,6 @@
 const Role = require('../models/role')
 const User = require('../models/user')
+const Guest = require('../models/guest')
 
 
 const esRoleValido = async(rol='')=>{
@@ -13,12 +14,18 @@ const emailExiste = async(email='')=>{
 }
 
 const existeUserByID = async(id)=>{
-    const existeUser = await User.findById({id})
+    const existeUser = await User.findById(id)
     if(!existeUser) throw new Error(`El id usuario ${id} no existe `)
+}
+
+const existeGuestByID = async(id)=>{
+    const existeGuest = await Guest.findById(id)
+    if(!existeGuest) throw new Error(`El id de invitado ${id} no existe `)
 }
 
 module.exports = {
     esRoleValido,
     emailExiste,
-    existeUserByID
+    existeUserByID,
+    existeGuestByID
 }

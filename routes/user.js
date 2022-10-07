@@ -22,7 +22,13 @@ router.put('/:id',[
     validarCampos
 ]
 ,usersPut)//para pasar datos desde la ruta
-router.delete('/',usersDelete)
+router.delete('/:id',
+[
+    check('id','No es un ID Válido').isMongoId(),//el id es el de la ruta, no el _id
+    check('id').custom(existeUserByID),
+    validarCampos
+]
+,usersDelete)
 router.patch('/',usersPatch)
 
 

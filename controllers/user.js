@@ -67,10 +67,20 @@ const usersPut = async (req,res=responde)=>{
     })
 }
 
-const usersDelete = (req,res=responde)=>{
-    res.json({
-        msg:"delete Api contriolador"
-    })
+const usersDelete = async(req,res=responde)=>{
+
+    const {id} = req.params
+
+    //Borrado fisico
+    //const user = await User.findByIdAndDelete(id)
+
+    //Borrado logico
+    const user = await User.findByIdAndUpdate(id,{estado:false})
+
+
+    res.json(
+        user
+    )
 }
 
 const usersPatch = (req,res=responde)=>{

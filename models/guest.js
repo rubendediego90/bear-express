@@ -7,28 +7,33 @@ const GuestSchema = Schema({
     },
     acompaniantesNombre:{
         type:String,
-        required:[true,'El correo es obligatorio'],
-        unique:true
+        default:null
     },
     numAdultos:{
         type:Number,
-        required:true,
-        enum:['ADMIN_ROLE','USER_ROLE']
+        default:1
     },
     numNinios:{
         type:Number,
-        required:true,
-        enum:['ADMIN_ROLE','USER_ROLE']
+        default:0
     },
     alergias:{
         type:String,
-        required:[true,'La contraseña es obligatoria']
+        default:null
     },
     bus:{
         type:Boolean,
-        default:true
+        default:false
+    },
+    observaciones:{
+        type:String,
+        default:null
+    },
+    fechaRegistro:{
+        type: Date,
+		default: Date.now
     }
 })
 
 
-module.exports = model('User',GuestSchema)
+module.exports = model('Guest',GuestSchema)
