@@ -3,15 +3,9 @@ const Music = require('../models/music')
 
 const musicGet =async (req=request,res=responde)=>{
 
-    const {page=0,pageSize=10} = req.query//valores por defecto
-
-    const query = {estado:true}
-
     const [total,musics] = await Promise.all([
-        Music.countDocuments(query),
-        Music.find(query)
-        .skip(Number(page))
-        .limit(Number(pageSize))
+        Music.countDocuments(),
+        Music.find()
 
     ])
 
