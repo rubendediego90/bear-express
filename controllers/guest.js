@@ -3,15 +3,10 @@ const Guest = require('../models/guest')
 
 const guestGet =async (req=request,res=responde)=>{
 
-    const {page=0,pageSize=10} = req.query//valores por defecto
-
-    const query = {estado:true}
 
     const [total,guests] = await Promise.all([
-        Guest.countDocuments(query),
-        Guest.find(query)
-        .skip(Number(page))
-        .limit(Number(pageSize))
+        Guest.countDocuments(),
+        Guest.find()
 
     ])
 
