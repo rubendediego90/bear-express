@@ -14,8 +14,8 @@ const musicGet =async (req=request,res=responde)=>{
 
 const musicPost= async(req,res=responde)=>{
 
-    const {nombre} = req.body
-    const music = new Music({nombre})
+    const {name,id,title} = req.body
+    const music = new Music({name,id,title})
 
     try{
         await music.save()
