@@ -3,7 +3,6 @@ const {Schema,model} = require('mongoose')
 const MusicSchema = Schema({
     name:{
         type:String,
-        required:[true,'El nombre es obligatorio']
     },
     title:{
         type:String
