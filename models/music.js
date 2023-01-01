@@ -4,9 +4,6 @@ const MusicSchema = Schema({
     name:{
         type:String,
     },
-    title:{
-        type:String
-    },
     id:{
         type:String
     }
